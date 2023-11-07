@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 2147e6988e71745ba9ae9650d33937b6
+guid: 3ae6cfcecc54949d39a866bd8f0a38ec
 AssetOrigin:
   serializedVersion: 1
   productId: 82022
   packageName: Oculus Integration
   packageVersion: 57.0
-  assetPath: Assets/Oculus/Spatializer/Plugins/x86/AudioPluginOculusSpatializer.dll.new
+  assetPath: Assets/Oculus/Spatializer/Plugins/x86_64/AudioPluginOculusSpatializer.dll.new
   uploadId: 618200
 PluginImporter:
   externalObjects: {}
@@ -23,7 +23,7 @@ PluginImporter:
     second:
       enabled: 0
       settings:
-        CPU: X86
+        CPU: X86_64
         OS: Windows
   - first:
       Any: 
@@ -35,33 +35,33 @@ PluginImporter:
     second:
       enabled: 1
       settings:
-        CPU: X86
+        CPU: X86_64
         DefaultValueInitialized: true
         OS: Windows
   - first:
       Standalone: Linux64
     second:
-      enabled: 0
+      enabled: 1
       settings:
-        CPU: None
+        CPU: AnyCPU
   - first:
       Standalone: OSXUniversal
     second:
       enabled: 0
       settings:
-        CPU: x86
+        CPU: x86_64
   - first:
       Standalone: Win
-    second:
-      enabled: 1
-      settings:
-        CPU: x86
-  - first:
-      Standalone: Win64
     second:
       enabled: 0
       settings:
         CPU: None
+  - first:
+      Standalone: Win64
+    second:
+      enabled: 1
+      settings:
+        CPU: x86_64
   userData: 
   assetBundleName: 
   assetBundleVariant: 
