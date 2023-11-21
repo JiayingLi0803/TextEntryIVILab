@@ -8,10 +8,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/keyboardTyping.unity
     guid: 7365856d018f640f7a423675596e6254
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MetaBuiltInPokeExamples.unity
     guid: 9aa76a189580f4c2391f2216416feeca
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/MetaBuiltInKeyboard.unity
     guid: 07588f6654c0140fe90a856dcf0472ed
   m_configObjects:
