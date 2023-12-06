@@ -1,5 +1,5 @@
 # ninja log v5
-156	256	1700020385299098666	/Users/jiayingli/Desktop/GitHub/TextEntryIVILab/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/2w4f3z38/obj/arm64-v8a/libswappywrapper.so	267a169a6e23363d
-0	156	1700020385223057484	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	e40b411488de6911
 0	416	1700524416704552022	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	e40b411488de6911
 416	665	1700524416934834108	/Users/jiayingli/Desktop/GitHub/TextEntryIVILab/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/2w4f3z38/obj/arm64-v8a/libswappywrapper.so	267a169a6e23363d
+1	603	1701825729781758208	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	e17c7c9cc5e0fffc
+603	944	1701825730103614545	/Users/jiayingli/Desktop/GitHub/TextEntryIVILab/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/2w4f3z38/obj/arm64-v8a/libswappywrapper.so	22dd803e6049f221

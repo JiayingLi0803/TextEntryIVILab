@@ -11,9 +11,18 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/MetaBuiltInPokeExamples.unity
     guid: 9aa76a189580f4c2391f2216416feeca
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MetaBuiltInKeyboard.unity
     guid: 07588f6654c0140fe90a856dcf0472ed
+  - enabled: 0
+    path: Assets/Scenes/button.unity
+    guid: 2c325d8ba428b4b83b89afe9ca10da87
+  - enabled: 0
+    path: Assets/Oculus/Interaction/Samples/Scenes/Features/PokeButton.unity
+    guid: 32b32b71d73d2d649bf917f969f663a1
+  - enabled: 1
+    path: Assets/Scenes/buttontest.unity
+    guid: 77ea1af114f6f4c72b1ac19092aa608c
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: ec821003707fb4525a94b7911d7db085, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 337e3835705a844e3a41bdb30ced55cf, type: 2}
