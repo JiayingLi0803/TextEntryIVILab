@@ -7,10 +7,8 @@ public class showCanvas : MonoBehaviour
 {
     // Start is called before the first frame update
     public TextMeshProUGUI numberText;
-    int number;
     public void displayNumber(){
-        number ++ ;
-        numberText.text = "Count: " + number + "";
+        numberText.text += gameObject.name;
     }
     void Start()
     {

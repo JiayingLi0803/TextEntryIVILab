@@ -9,7 +9,7 @@ public class keySwitch : MonoBehaviour
     public GameObject normalKeys;
     public GameObject capitalKeys;
     public TextMeshPro capsText;
-    public TMP_InputField inputField;
+    public TextMeshProUGUI inputCanvas;
     // Start is called before the first frame update
     void Start()
     {
@@ -34,12 +34,12 @@ public class keySwitch : MonoBehaviour
     }
 
     public void delPressed(){
-        if (inputField.text.Length > 0) {
-            inputField.text = inputField.text.Substring(0, inputField.text.Length - 1);
+        if (inputCanvas.text.Length > 0) {
+            inputCanvas.text = inputCanvas.text.Substring(0, inputCanvas.text.Length - 1);
         }
     }
     public void returnPressed(){
-        inputField.text += "\n";
+        inputCanvas.text += "\n";
     }
 
     // Update is called once per frame
