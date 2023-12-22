@@ -6,9 +6,15 @@ using TMPro;
 public class keySwitch : MonoBehaviour
 {
     public bool capsLock;
+    public bool shiftLeft;
+    public bool shiftRight;
     public GameObject normalKeys;
     public GameObject capitalKeys;
     public TextMeshPro capsText;
+    public GameObject beforeShiftKeys;
+    public GameObject afterShiftKeys;
+    public TextMeshPro shiftLeftText;
+    public TextMeshPro shiftRightText;
     public TextMeshProUGUI inputCanvas;
     // Start is called before the first frame update
     void Start()
@@ -16,6 +22,11 @@ public class keySwitch : MonoBehaviour
         capsLock = false;
         capitalKeys.SetActive(false);
         normalKeys.SetActive(true);
+
+        shiftLeft = false;
+        shiftRight = false;
+        afterShiftKeys.SetActive(false);
+        beforeShiftKeys.SetActive(true);
     }
 
     public void capsPressed(){
@@ -30,6 +41,43 @@ public class keySwitch : MonoBehaviour
             normalKeys.SetActive(true);
             capsLock = false;
             capsText.text = "caps lock";
+        }
+    }
+
+        public void shiftLeftPressed(){
+        if (!shiftLeft && !shiftRight) {
+            beforeShiftKeys.SetActive(false);
+            afterShiftKeys.SetActive(true);
+            shiftLeft = true;
+            shiftRight = true;
+            shiftLeftText.text = "SHIFT";
+            shiftRightText.text = "SHIFT";
+        }
+        else {
+            afterShiftKeys.SetActive(false);
+            beforeShiftKeys.SetActive(true);
+            shiftLeft = false;
+            shiftRight = false;
+            shiftLeftText.text = "shift";
+            shiftRightText.text = "shift";
+        }
+    }
+    public void shiftRightPressed(){
+        if (!shiftLeft && !shiftRight) {
+            beforeShiftKeys.SetActive(false);
+            afterShiftKeys.SetActive(true);
+            shiftLeft = true;
+            shiftRight = true;
+            shiftLeftText.text = "SHIFT";
+            shiftRightText.text = "SHIFT";
+        }
+        else {
+            afterShiftKeys.SetActive(false);
+            beforeShiftKeys.SetActive(true);
+            shiftLeft = false;
+            shiftRight = false;
+            shiftLeftText.text = "shift";
+            shiftRightText.text = "shift";
         }
     }
 
