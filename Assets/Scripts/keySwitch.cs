@@ -6,8 +6,9 @@ using TMPro;
 public class keySwitch : MonoBehaviour
 {
     public bool capsLock;
-    public bool shiftLeft;
-    public bool shiftRight;
+    // private bool shiftLeft;
+    // private bool shiftRight;
+    public bool shiftKey;
     public GameObject normalKeys;
     public GameObject capitalKeys;
     public TextMeshPro capsText;
@@ -23,8 +24,9 @@ public class keySwitch : MonoBehaviour
         capitalKeys.SetActive(false);
         normalKeys.SetActive(true);
 
-        shiftLeft = false;
-        shiftRight = false;
+        // shiftLeft = false;
+        // shiftRight = false;
+        shiftKey = false;
         afterShiftKeys.SetActive(false);
         beforeShiftKeys.SetActive(true);
     }
@@ -44,42 +46,40 @@ public class keySwitch : MonoBehaviour
         }
     }
 
-        public void shiftLeftPressed(){
-        if (!shiftLeft && !shiftRight) {
+        public void shiftPressed(){
+        if (!shiftKey) {
             beforeShiftKeys.SetActive(false);
             afterShiftKeys.SetActive(true);
-            shiftLeft = true;
-            shiftRight = true;
+            shiftKey = true;
             shiftLeftText.text = "SHIFT";
             shiftRightText.text = "SHIFT";
         }
         else {
             afterShiftKeys.SetActive(false);
             beforeShiftKeys.SetActive(true);
-            shiftLeft = false;
-            shiftRight = false;
+            shiftKey = false;
             shiftLeftText.text = "shift";
             shiftRightText.text = "shift";
         }
     }
-    public void shiftRightPressed(){
-        if (!shiftLeft && !shiftRight) {
-            beforeShiftKeys.SetActive(false);
-            afterShiftKeys.SetActive(true);
-            shiftLeft = true;
-            shiftRight = true;
-            shiftLeftText.text = "SHIFT";
-            shiftRightText.text = "SHIFT";
-        }
-        else {
-            afterShiftKeys.SetActive(false);
-            beforeShiftKeys.SetActive(true);
-            shiftLeft = false;
-            shiftRight = false;
-            shiftLeftText.text = "shift";
-            shiftRightText.text = "shift";
-        }
-    }
+    // public void shiftRightPressed(){
+    //     if (!shiftLeft && !shiftRight) {
+    //         beforeShiftKeys.SetActive(false);
+    //         afterShiftKeys.SetActive(true);
+    //         shiftLeft = true;
+    //         shiftRight = true;
+    //         shiftLeftText.text = "SHIFT";
+    //         shiftRightText.text = "SHIFT";
+    //     }
+    //     else {
+    //         afterShiftKeys.SetActive(false);
+    //         beforeShiftKeys.SetActive(true);
+    //         shiftLeft = false;
+    //         shiftRight = false;
+    //         shiftLeftText.text = "shift";
+    //         shiftRightText.text = "shift";
+    //     }
+    // }
 
     public void delPressed(){
         if (inputCanvas.text.Length > 0) {

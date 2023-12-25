@@ -10,9 +10,12 @@ public class showCaret : MonoBehaviour
     public TextMeshProUGUI wordText;
     public TextMeshProUGUI caretText;
     // Start is called before the first frame update
+    private bool directionKey;
+    private int caretPos;
     void Start()
     {
         caretText.text = wordText.text;
+        directionKey = false; // turn off the direction buttons
     }
 
     public static string ReplaceExceptNewlines(string input){
@@ -21,11 +24,53 @@ public class showCaret : MonoBehaviour
         return result;
     }
 
+    public void upPressed(){
+
+    }
+    public void downPressed(){
+        
+    }
+    public void leftPressed(){
+        if (!string.IsNullOrEmpty(wordText.text)){
+
+        }
+    }
+        public void rightPressed(){
+        
+    }
+
     // Update is called once per frame
     void Update()
     {
-        string beforeCaret = wordText.text.Substring(0, wordText.text.Length-1);
-        string boldText = wordText.text.Substring(wordText.text.Length - 1);
-        caretText.text = beforeCaret + "<mark=#000000EF>" + boldText + "</mark>";
+        if (!string.IsNullOrEmpty(wordText.text)){
+            if (!directionKey){
+                string beforeCaret = wordText.text.Substring(0, wordText.text.Length-1);
+                string boldText = wordText.text.Substring(wordText.text.Length - 1);
+                if (boldText == " "){
+                    caretText.text = beforeCaret + "<mark=#000000FF>" + "_" + "</mark>"; 
+                }
+                else if (wordText.text.Length > 2){
+                    string newLineJudge = wordText.text.Substring(wordText.text.Length - 2);
+                    if (newLineJudge == "\n"){
+                        caretText.text = wordText.text + "<mark=#000000FF>" + "_" + "</mark>";
+                    }
+                    else{
+                        caretText.text = beforeCaret + "<mark=#000000FF>" + boldText + "</mark>"; 
+                    }
+                }
+                else{
+                    caretText.text = beforeCaret + "<mark=#000000FF>" + boldText + "</mark>"; 
+                }
+            }
+            else{
+                
+            }
+        }
+        else
+        {
+            caretText.text = "<mark=#000000FF>" + "_" + "</mark>"; 
+        }
+        
+        
     }
 }
