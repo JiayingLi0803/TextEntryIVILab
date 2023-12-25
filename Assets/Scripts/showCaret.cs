@@ -42,22 +42,23 @@ public class showCaret : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!string.IsNullOrEmpty(wordText.text)){
+        if (string.IsNullOrEmpty(wordText.text))
+        {
+            caretText.text = "<mark=#000000FF>" + "_" + "</mark>"; 
+        }
+        else if (wordText.text[wordText.text.Length - 1] == '\n')
+        {
+            caretText.text = wordText.text + "<mark=#000000FF>" + "_" + "</mark>";
+        }
+        else
+        {
             if (!directionKey){
                 string beforeCaret = wordText.text.Substring(0, wordText.text.Length-1);
                 string boldText = wordText.text.Substring(wordText.text.Length - 1);
                 if (boldText == " "){
                     caretText.text = beforeCaret + "<mark=#000000FF>" + "_" + "</mark>"; 
                 }
-                else if (wordText.text.Length > 2){
-                    string newLineJudge = wordText.text.Substring(wordText.text.Length - 2);
-                    if (newLineJudge == "\n"){
-                        caretText.text = wordText.text + "<mark=#000000FF>" + "_" + "</mark>";
-                    }
-                    else{
-                        caretText.text = beforeCaret + "<mark=#000000FF>" + boldText + "</mark>"; 
-                    }
-                }
+                
                 else{
                     caretText.text = beforeCaret + "<mark=#000000FF>" + boldText + "</mark>"; 
                 }
@@ -66,11 +67,6 @@ public class showCaret : MonoBehaviour
                 
             }
         }
-        else
-        {
-            caretText.text = "<mark=#000000FF>" + "_" + "</mark>"; 
-        }
-        
         
     }
 }
