@@ -9,8 +9,10 @@ public class showCaret : MonoBehaviour
 {
     public TextMeshProUGUI wordText;
     public TextMeshProUGUI caretText;
+    public TextMeshProUGUI lineInfoCanvas;
+    public TextMeshProUGUI caretPosCanvas;
     // Start is called before the first frame update
-    private bool directionKey;
+    public bool directionKey;
     private int caretPos;
     void Start()
     {
@@ -32,11 +34,21 @@ public class showCaret : MonoBehaviour
     }
     public void leftPressed(){
         if (!string.IsNullOrEmpty(wordText.text)){
-
+            caretPosCanvas.text = int.Parse(caretPosCanvas.text.Substring(caretPosCanvas.text.Length-1).ToString()) - 1 + "";
+            directionKey = true;
+        }
+        else{
+            directionKey = false;
         }
     }
         public void rightPressed(){
-        
+            caretPos = int.Parse(caretPosCanvas.text.Substring(caretPosCanvas.text.Length-1).ToString());
+        if (caretPos < wordText.text.Length){
+            caretPosCanvas.text = caretPos + 1 + "";
+        }
+        else{
+            directionKey = false;
+        }
     }
 
     // Update is called once per frame
@@ -64,9 +76,13 @@ public class showCaret : MonoBehaviour
                 }
             }
             else{
-                
-            }
+                caretPos = int.Parse(caretPosCanvas.text.Substring(caretPosCanvas.text.Length-1).ToString());
+                string beforeCaret = wordText.text.Substring(0, caretPos-1);
+                string boldText = wordText.text.Substring(caretPos-1, 1);
+                string afterCaret = wordText.text.Substring(caretPos);
+                caretText.text = beforeCaret + "<mark=#000000FF>" + boldText + "</mark>" + afterCaret; 
         }
         
+        }
     }
 }
