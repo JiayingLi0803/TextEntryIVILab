@@ -15,6 +15,10 @@ public class keySwitch : MonoBehaviour
     public TextMeshPro shiftLeftText;
     public TextMeshPro shiftRightText;
     public TextMeshProUGUI inputCanvas;
+    public TextMeshProUGUI lineInfoCanvas;
+    int lineNum;
+    int charNum;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -61,11 +65,19 @@ public class keySwitch : MonoBehaviour
 
     public void delPressed(){
         if (inputCanvas.text.Length > 0) {
+            if (inputCanvas.text[inputCanvas.text.Length - 1] == '\n'){
+                lineNum = int.Parse(lineInfoCanvas.text.Substring(lineInfoCanvas.text.Length-1).ToString());
+                lineNum -= 1;
+                lineInfoCanvas.text = "Lines: " + lineNum + "";
+            }
             inputCanvas.text = inputCanvas.text.Substring(0, inputCanvas.text.Length - 1);
         }
     }
     public void returnPressed(){
         inputCanvas.text += "\n";
+        lineNum = int.Parse(lineInfoCanvas.text.Substring(lineInfoCanvas.text.Length-1).ToString());
+        lineNum += 1;
+        lineInfoCanvas.text = "Lines: " + lineNum + "";
     }
 
     // Update is called once per frame
