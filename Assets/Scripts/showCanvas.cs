@@ -6,10 +6,15 @@ using TMPro;
 public class showCanvas : MonoBehaviour
 {
     // Start is called before the first frame update
-    public TextMeshProUGUI numberText;
+    public TextMeshProUGUI numberText;// word text
     public TextMeshProUGUI caretPosCanvas;
     public void displayNumber(){
-        numberText.text += gameObject.name;
+        int currentCaretValue = int.Parse(caretPosCanvas.text);
+        
+        numberText.text = numberText.text.Insert(currentCaretValue, gameObject.name);
+        
+        currentCaretValue += 1;
+        caretPosCanvas.text = currentCaretValue + "";
     }
     void Start()
     {

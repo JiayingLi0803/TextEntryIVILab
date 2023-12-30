@@ -16,6 +16,7 @@ public class keySwitch : MonoBehaviour
     public TextMeshPro shiftRightText;
     public TextMeshProUGUI inputCanvas;
     public TextMeshProUGUI lineInfoCanvas;
+    public TextMeshProUGUI caretPosCanvas;
     int lineNum;
     int charNum;
 
@@ -64,20 +65,37 @@ public class keySwitch : MonoBehaviour
     }
 
     public void delPressed(){
-        if (inputCanvas.text.Length > 0) {
-            if (inputCanvas.text[inputCanvas.text.Length - 1] == '\n'){
+        charNum = int.Parse(caretPosCanvas.text); // caret position
+        if (charNum > 1) {
+            if (inputCanvas.text[charNum-1] == '\n'){
                 lineNum = int.Parse(lineInfoCanvas.text.Substring(lineInfoCanvas.text.Length-1).ToString());
                 lineNum -= 1;
                 lineInfoCanvas.text = "Lines: " + lineNum + "";
             }
-            inputCanvas.text = inputCanvas.text.Substring(0, inputCanvas.text.Length - 1);
+            string beforeCaret = inputCanvas.text.Substring(0, charNum-1);
+            string afterCaret = inputCanvas.text.Substring(charNum);
+            inputCanvas.text =  beforeCaret + afterCaret;
+
+            charNum -= 1;
+            
         }
+        else if (charNum == 1){
+            inputCanvas.text =  inputCanvas.text.Substring(1);
+        }
+        caretPosCanvas.text = charNum + "";
     }
     public void returnPressed(){
-        inputCanvas.text += "\n";
+        charNum = int.Parse(caretPosCanvas.text);
+
+        inputCanvas.text = inputCanvas.text.Insert(charNum, "\n");
+        
+
         lineNum = int.Parse(lineInfoCanvas.text.Substring(lineInfoCanvas.text.Length-1).ToString());
         lineNum += 1;
         lineInfoCanvas.text = "Lines: " + lineNum + "";
+        
+        charNum += 1;
+        caretPosCanvas.text = charNum + "";
     }
 
     // Update is called once per frame
