@@ -40,21 +40,20 @@ public class showCaret : MonoBehaviour
             string[] linesList = beforeCaretText.Split('\n');
             string currLineStr = linesList[linesList.Length - 1];
             string secondLastStr = linesList[linesList.Length - 2];
-            
-            if (currLineStr.Length <= secondLastStr.Length){
-                if (secondLastStr.Length > wordLimit){
-                    caretPos = beforeCaretText.Length - secondLastStr.Length + wordLimit;
-                }
-                else{
-                    caretPos = beforeCaretText.Length - secondLastStr.Length;
-                }
-            }
-            else {
-                if (currLineStr.Length > wordLimit) {
+            if (currLineStr.Length > wordLimit) {
                     caretPos -= wordLimit;
+            }
+            else{
+                if (currLineStr.Length <= secondLastStr.Length){
+                    if (secondLastStr.Length > wordLimit){
+                        caretPos = beforeCaretText.Length - secondLastStr.Length + wordLimit;
+                    }
+                    else{
+                        caretPos = beforeCaretText.Length - secondLastStr.Length;
+                    }
                 }
-                else{
-                caretPos = beforeCaretText.Length - currLineStr.Length - 1;
+                else {
+                    caretPos = beforeCaretText.Length - currLineStr.Length - 1;
                 }
             }
 
@@ -73,7 +72,44 @@ public class showCaret : MonoBehaviour
     }
     public void downPressed()
     {
-
+        int distLenBefore;
+        caretPos = int.Parse(caretPosCanvas.text);
+        string afterCaretText = wordText.text.Substring(caretPos);
+        string beforeCaretText = wordText.text.Substring(0, caretPos - 1);
+        if (beforeCaretText.Contains('\n')){
+            string[] linesListBefore = beforeCaretText.Split('\n');
+            distLenBefore = linesListBefore[linesListBefore.Length-1].Length;
+        }
+        else{
+            distLenBefore = caretPos;
+        }
+        if (afterCaretText.Contains('\n')){
+            string[] linesList = afterCaretText.Split('\n');
+            string currLineStr = linesList[0];
+            string secondLastStr = linesList[1];
+            if (currLineStr.Length > wordLimit){
+                caretPos += wordLimit;
+            }
+            else{
+                if (secondLastStr.Length < distLenBefore) {
+                    caretPos = caretPos + currLineStr.Length + 1 + secondLastStr.Length;
+                }
+                else{
+                    caretPos = caretPos + currLineStr.Length + 1 + distLenBefore;
+                }
+            }
+            
+            directionKey = true;
+        }
+        else if (wordText.text.Length - caretPos > wordLimit){
+            caretPos += wordLimit;
+            directionKey = true;
+        }
+        else
+        {
+            directionKey = false;
+        }
+        caretPosCanvas.text = caretPos + "";
     }
     public void leftPressed()
     {
