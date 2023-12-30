@@ -13,6 +13,7 @@ public class showCaret : MonoBehaviour
     public TextMeshProUGUI caretPosCanvas;
     // Start is called before the first frame update
     public bool directionKey;
+    public int wordLimit = 33;
     private int caretPos;
     private string beforeCaret;
     private string boldText;
@@ -36,35 +37,32 @@ public class showCaret : MonoBehaviour
         string beforeCaretText = wordText.text.Substring(0, caretPos - 1);
         if (beforeCaretText.Contains('\n'))
         { // contains \n before the caret position
-            int lastNewLine = beforeCaretText.LastIndexOf('\n', caretPos); //the \n position before the caret
-            int distCaretNewLine = caretPos - lastNewLine; // distance from the beginning of the new line to the caret position
-            if (distCaretNewLine > 33)
-            {
-                caretPos -= 33;
-            }
-            else
-            {
-                string beforeNewLineText = beforeCaretText.Substring(0, lastNewLine);
-                int secondLastNewLine = beforeNewLineText.LastIndexOf('\n'); // the second last \n position before caret position
-                if (secondLastNewLine == -1)
-                {
-                    secondLastNewLine = 0;
+            string[] linesList = beforeCaretText.Split('\n');
+            string currLineStr = linesList[linesList.Length - 1];
+            string secondLastStr = linesList[linesList.Length - 2];
+            
+            if (currLineStr.Length <= secondLastStr.Length){
+                if (secondLastStr.Length > wordLimit){
+                    caretPos = beforeCaretText.Length - secondLastStr.Length + wordLimit;
                 }
-                int distSecondNewLine = lastNewLine - secondLastNewLine;
-                if (distSecondNewLine >= distCaretNewLine)
-                {
-                    caretPos = secondLastNewLine + distCaretNewLine;
-                }
-                else
-                {
-                    caretPos = secondLastNewLine - 1;
+                else{
+                    caretPos = beforeCaretText.Length - secondLastStr.Length;
                 }
             }
+            else {
+                if (currLineStr.Length > wordLimit) {
+                    caretPos -= wordLimit;
+                }
+                else{
+                caretPos = beforeCaretText.Length - currLineStr.Length - 1;
+                }
+            }
+
             directionKey = true;
         }
-        else if (caretPos > 33)
+        else if (caretPos > wordLimit)
         {
-            caretPos -= 33;
+            caretPos -= wordLimit;
             directionKey = true;
         }
         else
