@@ -46,7 +46,12 @@ public class showCaret : MonoBehaviour
             else{
                 if (currLineStr.Length <= secondLastStr.Length){
                     if (secondLastStr.Length > wordLimit){
-                        caretPos = beforeCaretText.Length - secondLastStr.Length + wordLimit;
+                        if (secondLastStr.Length - wordLimit < currLineStr.Length) {
+                            caretPos = beforeCaretText.Length - currLineStr.Length - 1;
+                        }
+                        else{
+                            caretPos = beforeCaretText.Length - secondLastStr.Length + wordLimit;
+                        }
                     }
                     else{
                         caretPos = beforeCaretText.Length - secondLastStr.Length;
