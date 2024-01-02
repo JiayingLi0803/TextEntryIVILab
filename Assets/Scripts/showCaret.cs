@@ -44,9 +44,9 @@ public class showCaret : MonoBehaviour
                     caretPos -= wordLimit;
             }
             else{
-                if (currLineStr.Length <= secondLastStr.Length){
+                if (currLineStr.Length < secondLastStr.Length){
                     if (secondLastStr.Length > wordLimit){
-                        if (secondLastStr.Length - wordLimit < currLineStr.Length) {
+                        if (secondLastStr.Length - wordLimit <= currLineStr.Length) {
                             caretPos = beforeCaretText.Length - currLineStr.Length - 1;
                         }
                         else{
@@ -92,15 +92,28 @@ public class showCaret : MonoBehaviour
             string[] linesList = afterCaretText.Split('\n');
             string currLineStr = linesList[0];
             string secondLastStr = linesList[1];
-            if (currLineStr.Length > wordLimit){
+            if (currLineStr.Length >= wordLimit){
                 caretPos += wordLimit;
             }
+            else if (currLineStr.Length + distLenBefore > wordLimit){
+                if (distLenBefore <= wordLimit) {
+                    caretPos += currLineStr.Length;
+                }
+                else {
+                    if (distLenBefore - wordLimit > secondLastStr.Length) {
+                        caretPos = caretPos + currLineStr.Length + 1 + secondLastStr.Length;
+                    }
+                    else {
+                        caretPos = caretPos + currLineStr.Length + 2 + distLenBefore - wordLimit;
+                    }
+                }
+            }
             else{
-                if (secondLastStr.Length < distLenBefore) {
+                if (secondLastStr.Length <= distLenBefore) {
                     caretPos = caretPos + currLineStr.Length + 1 + secondLastStr.Length;
                 }
                 else{
-                    caretPos = caretPos + currLineStr.Length + 1 + distLenBefore;
+                    caretPos = caretPos + currLineStr.Length + 2 + distLenBefore;
                 }
             }
             
@@ -108,6 +121,10 @@ public class showCaret : MonoBehaviour
         }
         else if (wordText.text.Length - caretPos > wordLimit){
             caretPos += wordLimit;
+            directionKey = true;
+        }
+        else if (wordText.text.Length - caretPos + distLenBefore > wordLimit) {
+            caretPos = wordText.text.Length;
             directionKey = true;
         }
         else
