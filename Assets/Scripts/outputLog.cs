@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Oculus.Interaction;
 using TMPro;
 using UnityEngine;
-using Oculus.Interaction;
 using Oculus.Interaction.Input;
 
 public class outputLog : MonoBehaviour
@@ -26,13 +25,15 @@ public class outputLog : MonoBehaviour
     }
 
     public void showInitialPoint(PointerEvent pointOnCanvas){
-        HandRef fingerData = (HandRef)pointOnCanvas.Data;
-        pointerGUI.text = fingerData + "";
-
+        Pose p = pointOnCanvas.Pose;
+        string initialPosition = $"Position: {p.position}";
+        pointerGUI.text = initialPosition;
 
     }
-    public void showMovePosition(){
-        
+    public void showMovePosition(PointerEvent leaveCanvas){
+        Pose lp = leaveCanvas.Pose;
+        string finalPosition = $"Position: {lp.position}";
+        pointerGUI.text = finalPosition;
     }
 
     // Update is called once per frame
