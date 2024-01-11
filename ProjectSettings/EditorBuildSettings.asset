@@ -24,8 +24,8 @@ EditorBuildSettings:
     path: Assets/Scenes/controllerTyping.unity
     guid: fb546614062464f1ba5cb4f240918b25
   - enabled: 0
-    path: Assets/Scenes/testInputField.unity
-    guid: 18eb757ee70104263b47d9d078543f1c
+    path: Assets/Scenes/ControllerSelection.unity
+    guid: 83f7ae7f469e642f387ed95f29ed1b3f
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: ec821003707fb4525a94b7911d7db085, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 337e3835705a844e3a41bdb30ced55cf, type: 2}

@@ -26,6 +26,8 @@ public class outputLog : MonoBehaviour
     private string boldChars;
     private string afterBold;
 
+    public bool selectedFlag = false;
+
     int pressNum = 0;
     // Start is called before the first frame update
     void Start(){
@@ -56,6 +58,14 @@ public class outputLog : MonoBehaviour
         finalCaretPosition = fp.position;
         string finalPosition = $"Position: {finalCaretPosition}";
         finalPointGUI.text = finalPosition;
+    }
+
+    public void setSelectedFlagTrue(){
+        selectedFlag = true;
+    }
+
+    public void setSelectedFlagFalse(){
+        selectedFlag = false;
     }
 
     // private int locateCaret(Vector3 currPos){
@@ -127,27 +137,28 @@ public int FindCharacterIndexAtWorldPoint(Vector3 worldPoint)
     }
 
     public void finalCharacter(){
-        finalCharIndex = FindCharacterIndexAtWorldPoint(finalCaretPosition);
-        initPointGUI.text = "Initial character at index" + characterIndex + ": " + textGUI.text[characterIndex];
+        if (selectedFlag){
+            finalCharIndex = FindCharacterIndexAtWorldPoint(finalCaretPosition);
+            initPointGUI.text = "Initial character at index" + characterIndex + ": " + textGUI.text[characterIndex];
 
-        if (finalCharIndex != -1)
-        {
-            beforeBold = textGUI.text.Substring(0, characterIndex);
-            
-            boldChars = textGUI.text.Substring(characterIndex, finalCharIndex - characterIndex + 1);
-            logGUI.text = boldChars;
-            afterBold = textGUI.text.Substring(finalCharIndex + 1);
-            
-            finalPointGUI.text = "Final character at index " + finalCharIndex + ": " + textGUI.text[finalCharIndex];
+            if (finalCharIndex != -1)
+            {
+                beforeBold = textGUI.text.Substring(0, characterIndex);
+                
+                boldChars = textGUI.text.Substring(characterIndex, finalCharIndex - characterIndex + 1);
+                logGUI.text = boldChars;
+                afterBold = textGUI.text.Substring(finalCharIndex + 1);
+                
+                finalPointGUI.text = "Final character at index " + finalCharIndex + ": " + textGUI.text[finalCharIndex];
 
-            
-            CaretGUI.text = beforeBold + "<mark=#000000FF>" + boldChars + "</mark>" + afterBold;
+                
+                CaretGUI.text = beforeBold + "<mark=#000000FF>" + boldChars + "</mark>" + afterBold;
+            }
+            else
+            {
+                logGUI.text = "No character found at the clicked point.";
+            }
         }
-        else
-        {
-            logGUI.text = "No character found at the clicked point.";
-        }
-
     }
 
 
