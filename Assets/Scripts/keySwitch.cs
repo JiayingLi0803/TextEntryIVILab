@@ -67,11 +67,11 @@ public class keySwitch : MonoBehaviour
     public void delPressed(){
         charNum = int.Parse(caretPosCanvas.text); // caret position
         if (charNum > 1) {
-            if (inputCanvas.text[charNum-1] == '\n'){
-                lineNum = int.Parse(lineInfoCanvas.text.Substring(lineInfoCanvas.text.Length-1).ToString());
-                lineNum -= 1;
-                lineInfoCanvas.text = "Lines: " + lineNum + "";
-            }
+            // if (inputCanvas.text[charNum-1] == '\n'){
+            //     lineNum = int.Parse(lineInfoCanvas.text.Substring(lineInfoCanvas.text.Length-1).ToString());
+            //     lineNum -= 1;
+            //     lineInfoCanvas.text = "Lines: " + lineNum + "";
+            // }
             string beforeCaret = inputCanvas.text.Substring(0, charNum-1);
             string afterCaret = inputCanvas.text.Substring(charNum);
             inputCanvas.text =  beforeCaret + afterCaret;
@@ -101,6 +101,7 @@ public class keySwitch : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        lineNum = inputCanvas.text.Split('\n').Length;
+        lineInfoCanvas.text = "Lines: " + lineNum + "";
     }
 }
