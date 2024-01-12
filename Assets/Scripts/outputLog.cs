@@ -87,45 +87,102 @@ public class outputLog : MonoBehaviour
     //     return 0;
     // }
 
-public int FindCharacterIndexAtWorldPoint(Vector3 worldPoint)
+// public int FindCharacterIndexAtWorldPoint(Vector3 worldPoint)
+//     {
+//         Vector3 localPoint;
+//         RectTransformUtility.ScreenPointToWorldPointInRectangle(
+//             textGUI.rectTransform, worldPoint, null, out localPoint
+//         );
+
+//         // Get the TextInfo of the TextMeshProUGUI component
+//         TMP_TextInfo textInfo = textGUI.textInfo;
+
+//         // Iterate through the characters in the text
+//         for (int i = 0; i < textInfo.characterCount; i++)
+//         {
+//             TMP_CharacterInfo charInfo = textInfo.characterInfo[i];
+
+//             // Calculate the x and y positions of the character's bounds
+//             float minX = textGUI.transform.TransformPoint(charInfo.bottomLeft).x;
+//             float maxX = textGUI.transform.TransformPoint(charInfo.topRight).x;
+//             float minY = textGUI.transform.TransformPoint(charInfo.bottomLeft).y;
+//             float maxY = textGUI.transform.TransformPoint(charInfo.topRight).y;
+
+//             // Check if the provided x and y coordinates are within the bounds of the character
+//             if (localPoint.x >= minX && localPoint.x <= maxX &&
+//                 localPoint.y >= minY && localPoint.y <= maxY)
+//             {
+//                 // Return the index of the character in the text string
+//                 return i;
+//             }
+//         }
+
+//         // Return -1 if no character is found at the provided x and y coordinates
+//         return -1;
+//     }
+
+public int FindClosestCharacterIndexAtWorldPoint(Vector3 worldPoint)
+{
+    Vector3 localPoint;
+    RectTransformUtility.ScreenPointToWorldPointInRectangle(
+        textGUI.rectTransform, worldPoint, null, out localPoint
+    );
+
+    // Get the TextInfo of the TextMeshProUGUI component
+    TMP_TextInfo textInfo = textGUI.textInfo;
+
+    int closestCharacterIndex = -1;
+    float closestDistance = float.MaxValue;
+
+    // Calculate the size of one character (assuming it's monospaced)
+    float charWidth = textGUI.GetPreferredValues().x / textGUI.text.Length; // Character width
+    float charHeight = textGUI.GetPreferredValues().y; // Character height
+
+    // Iterate through the characters in the text
+    for (int i = 0; i < textInfo.characterCount; i++)
     {
-        Vector3 localPoint;
-        RectTransformUtility.ScreenPointToWorldPointInRectangle(
-            textGUI.rectTransform, worldPoint, null, out localPoint
-        );
+        TMP_CharacterInfo charInfo = textInfo.characterInfo[i];
 
-        // Get the TextInfo of the TextMeshProUGUI component
-        TMP_TextInfo textInfo = textGUI.textInfo;
+        // Calculate the x and y positions of the character's bounds
+        float minX = textGUI.transform.TransformPoint(charInfo.bottomLeft).x;
+        float maxX = textGUI.transform.TransformPoint(charInfo.topRight).x;
+        float minY = textGUI.transform.TransformPoint(charInfo.bottomLeft).y;
+        float maxY = textGUI.transform.TransformPoint(charInfo.topRight).y;
 
-        // Iterate through the characters in the text
-        for (int i = 0; i < textInfo.characterCount; i++)
+        // Calculate the center of the character's bounds
+        float centerX = (minX + maxX) * 0.5f;
+        float centerY = (minY + maxY) * 0.5f;
+
+        // Calculate the distance from the click point to the center of the character's bounds
+        float distance = Vector2.Distance(new Vector2(localPoint.x, localPoint.y), new Vector2(centerX, centerY));
+
+        // Check if this character is closer than the previously closest character
+        if (distance < closestDistance)
         {
-            TMP_CharacterInfo charInfo = textInfo.characterInfo[i];
-
-            // Calculate the x and y positions of the character's bounds
-            float minX = textGUI.transform.TransformPoint(charInfo.bottomLeft).x;
-            float maxX = textGUI.transform.TransformPoint(charInfo.topRight).x;
-            float minY = textGUI.transform.TransformPoint(charInfo.bottomLeft).y;
-            float maxY = textGUI.transform.TransformPoint(charInfo.topRight).y;
-
-            // Check if the provided x and y coordinates are within the bounds of the character
-            if (localPoint.x >= minX && localPoint.x <= maxX &&
-                localPoint.y >= minY && localPoint.y <= maxY)
-            {
-                // Return the index of the character in the text string
-                return i;
-            }
+            closestDistance = distance;
+            closestCharacterIndex = i;
         }
+    }
 
-        // Return -1 if no character is found at the provided x and y coordinates
+    // Check if the closest distance is less than or equal to one character size
+    if (closestDistance <= Mathf.Max(charWidth, charHeight))
+    {
+        // Return the index of the closest character in the text string
+        return closestCharacterIndex;
+    }
+    else
+    {
+        // Return -1 if the closest character is too far away
         return -1;
     }
+}
+
 
     // Helper function to check if a point is inside a quad defined by its four corners
 
     public void showCharacter(){
-        characterIndex = FindCharacterIndexAtWorldPoint(initCaretPosition);
-
+        // characterIndex = FindCharacterIndexAtWorldPoint(initCaretPosition);
+        characterIndex = FindClosestCharacterIndexAtWorldPoint(initCaretPosition);
         if (characterIndex != -1)
         {
             logGUI.text = "Character at index " + characterIndex + ": " + textGUI.text[characterIndex];
@@ -138,7 +195,8 @@ public int FindCharacterIndexAtWorldPoint(Vector3 worldPoint)
 
     public void finalCharacter(){
         if (selectedFlag){
-            finalCharIndex = FindCharacterIndexAtWorldPoint(finalCaretPosition);
+            // finalCharIndex = FindCharacterIndexAtWorldPoint(finalCaretPosition);
+            finalCharIndex = FindClosestCharacterIndexAtWorldPoint(finalCaretPosition);
             initPointGUI.text = "Initial character at index" + characterIndex + ": " + textGUI.text[characterIndex];
 
             if (finalCharIndex != -1)
