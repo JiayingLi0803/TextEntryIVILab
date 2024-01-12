@@ -61,7 +61,12 @@ public class showCaret : MonoBehaviour
                     }
                 }
                 else {
-                    caretPos = beforeCaretText.Length - currLineStr.Length - 1;
+                    if (secondLastStr == ""){
+                        caretPos = beforeCaretText.Length - secondLastStr.Length;
+                    }
+                    else {
+                        caretPos = beforeCaretText.Length - currLineStr.Length - 1;
+                    }
                 }
             }
 
@@ -202,9 +207,9 @@ public class showCaret : MonoBehaviour
             else
             {
                 if (wordText.text[caretPos-1] == '\n' && caretPos < wordText.text.Length){
-                    beforeCaret = wordText.text.Substring(0, caretPos);
-                    boldText = wordText.text.Substring(caretPos, 1);
-                    afterCaret = wordText.text.Substring(caretPos + 1);
+                    beforeCaret = wordText.text.Substring(0, caretPos-1);
+                    boldText = "_\n";
+                    afterCaret = wordText.text.Substring(caretPos);
                 }
                 else{
                     beforeCaret = wordText.text.Substring(0, caretPos - 1);
