@@ -43,6 +43,9 @@ public class showCaret : MonoBehaviour
             if (currLineStr.Length > wordLimit) {
                     caretPos -= wordLimit;
             }
+            else if (wordText.text[caretPos-1] == '\n'){
+                caretPos = wordText.text.Length - currLineStr.Length;
+            }
             else{
                 if (currLineStr.Length < secondLastStr.Length){
                     if (secondLastStr.Length > wordLimit){
@@ -67,6 +70,10 @@ public class showCaret : MonoBehaviour
         else if (caretPos > wordLimit)
         {
             caretPos -= wordLimit;
+            directionKey = true;
+        }
+        else if (wordText.text[caretPos-1] == '\n'){
+            caretPos = 1;
             directionKey = true;
         }
         else
@@ -169,10 +176,10 @@ public class showCaret : MonoBehaviour
             caretText.text = "<mark=#000000FF>" + "_" + "</mark>";
             caretPosCanvas.text = "0";
         }
-        else if (wordText.text[wordText.text.Length - 1] == '\n')
-        {
-            caretText.text = wordText.text + "<mark=#000000FF>" + "_" + "</mark>";
-        }
+        // else if (wordText.text[wordText.text.Length - 1] == '\n')
+        // {
+        //     caretText.text = wordText.text + "<mark=#000000FF>" + "_" + "</mark>";
+        // }
         else
         {
             caretPos = int.Parse(caretPosCanvas.text);
@@ -184,7 +191,9 @@ public class showCaret : MonoBehaviour
                 {
                     caretText.text = beforeCaret + "<mark=#000000FF>" + "_" + "</mark>";
                 }
-
+                else if (wordText.text[caretPos-1] == '\n'){
+                    caretText.text = wordText.text + "<mark=#000000FF>" + "_" + "</mark>";
+                }
                 else
                 {
                     caretText.text = beforeCaret + "<mark=#000000FF>" + boldText + "</mark>";
