@@ -11,6 +11,8 @@ public class showCaret : MonoBehaviour
     public TextMeshProUGUI caretText;
     public TextMeshProUGUI lineInfoCanvas;
     public TextMeshProUGUI caretPosCanvas;
+    public TextMeshProUGUI logCanvas;
+
     // Start is called before the first frame update
     public bool directionKey;
     public int wordLimit = 33;
@@ -87,6 +89,64 @@ public class showCaret : MonoBehaviour
         }
         caretPosCanvas.text = caretPos + "";
     }
+
+    // public void upPressed()
+    // {
+    //     // Get the TextInfo of the TextMeshProUGUI component
+    //     caretPos = int.Parse(caretPosCanvas.text);
+    //     TMP_TextInfo textInfo = wordText.textInfo;
+    //     int characterId = caretPos - 1;
+
+    //     // Calculate the position of the character at the caret position
+    //     TMP_CharacterInfo caretCharInfo = textInfo.characterInfo[characterId];
+    //     float caretX = (caretCharInfo.bottomLeft.x + caretCharInfo.topRight.x) * 0.5f;
+    //     float caretY = (caretCharInfo.bottomLeft.y + caretCharInfo.topRight.y) * 0.5f;
+
+    //     // Calculate the coordinates of the upper line (assuming it's a monospaced font)
+    //     float charHeight = wordText.GetPreferredValues().y;
+    //     float upperLineY = caretY + charHeight;
+
+    //     int closestCharacterIndex = -1;
+    //     float closestDistance = float.MaxValue;
+
+    //     // Iterate through the characters in the text
+    //     for (int i = 0; i < textInfo.characterCount; i++)
+    //     {
+    //         TMP_CharacterInfo charInfo = textInfo.characterInfo[i];
+
+    //         // Calculate the x and y positions of the character's bounds
+    //         float minX = wordText.transform.TransformPoint(charInfo.bottomLeft).x;
+    //         float maxX = wordText.transform.TransformPoint(charInfo.topRight).x;
+    //         float minY = wordText.transform.TransformPoint(charInfo.bottomLeft).y;
+    //         float maxY = wordText.transform.TransformPoint(charInfo.topRight).y;
+
+    //         // Calculate the center of the character's bounds
+    //         float centerX = (minX + maxX) * 0.5f;
+    //         float centerY = (minY + maxY) * 0.5f;
+
+    //         // Check if this character is in the upper line
+    //         if (centerY >= upperLineY){
+
+    //             // Calculate the distance from the character at caretPos
+    //             float distance = Vector2.Distance(new Vector2(caretX, caretY), new Vector2(centerX, centerY));
+    //             logCanvas.text += distance + "; ";
+
+    //             // Check if this character is closer than the previously closest character
+    //             if (distance < closestDistance)
+    //             {
+    //                 closestDistance = distance;
+    //                 closestCharacterIndex = i;
+    //             }
+    //         }
+    //     }
+
+    //     caretPos = closestCharacterIndex + 1;
+    //     // logCanvas.text = "caret coordinate: (" + caretX + "," + caretY + ";" + "upperLine:" + upperLineY + "carePos: " + caretPos;
+    //     caretPosCanvas.text = caretPos + "";
+    // }
+
+
+
     public void downPressed()
     {
         int distLenBefore;
@@ -209,6 +269,11 @@ public class showCaret : MonoBehaviour
                 if (wordText.text[caretPos-1] == '\n' && caretPos < wordText.text.Length){
                     beforeCaret = wordText.text.Substring(0, caretPos-1);
                     boldText = "_\n";
+                    afterCaret = wordText.text.Substring(caretPos);
+                }
+                else if (wordText.text[caretPos-1] =='\n'){
+                    beforeCaret = wordText.text.Substring(0, caretPos-1);
+                    boldText = "_";
                     afterCaret = wordText.text.Substring(caretPos);
                 }
                 else{

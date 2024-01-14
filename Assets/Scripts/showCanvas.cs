@@ -8,7 +8,9 @@ public class showCanvas : MonoBehaviour
     // Start is called before the first frame update
     public TextMeshProUGUI numberText;// word text
     public TextMeshProUGUI caretPosCanvas;
+    // public AudioSource typingAudio;
     public void displayNumber(){
+        // typingAudio.Play();
         int currentCaretValue = int.Parse(caretPosCanvas.text);
         
         numberText.text = numberText.text.Insert(currentCaretValue, gameObject.name);

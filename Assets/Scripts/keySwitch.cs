@@ -98,6 +98,12 @@ public class keySwitch : MonoBehaviour
         caretPosCanvas.text = charNum + "";
     }
 
+    public void clearPressed(){
+        lineInfoCanvas.text = "Lines: " + 0 + "";
+        inputCanvas.text = "";
+        caretPosCanvas.text = 0 + "";
+    }
+
     // Update is called once per frame
     void Update()
     {
