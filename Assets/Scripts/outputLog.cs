@@ -15,6 +15,7 @@ public class outputLog : MonoBehaviour
     public TextMeshProUGUI finalPointGUI;
     public TextMeshProUGUI CaretGUI;
     public TextMeshProUGUI textGUI;
+    public TextMeshProUGUI caretPositionGUI;
 
     public Vector3 initCaretPosition;
     public Vector3 finalCaretPosition;
@@ -211,6 +212,7 @@ public int FindClosestCharacterIndexAtWorldPoint(Vector3 worldPoint)
 
                 
                 CaretGUI.text = beforeBold + "<mark=#000000FF>" + boldChars + "</mark>" + afterBold;
+                caretPositionGUI.text = finalCharIndex + 1 + "";
             }
             else
             {

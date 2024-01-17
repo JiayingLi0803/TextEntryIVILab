@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
+using System.Text.RegularExpressions;
 
 public class keySwitch : MonoBehaviour
 {
@@ -15,8 +17,12 @@ public class keySwitch : MonoBehaviour
     public TextMeshPro shiftLeftText;
     public TextMeshPro shiftRightText;
     public TextMeshProUGUI inputCanvas;
+    public TextMeshProUGUI caretCanvas;
     public TextMeshProUGUI lineInfoCanvas;
     public TextMeshProUGUI caretPosCanvas;
+    public TextMeshProUGUI clipBoardCanvas;
+    public TextMeshProUGUI logGUI;
+
     int lineNum;
     int charNum;
 
@@ -99,10 +105,70 @@ public class keySwitch : MonoBehaviour
     }
 
     public void clearPressed(){
-        lineInfoCanvas.text = "Lines: " + 0 + "";
+        lineInfoCanvas.text = "Lines: " + 1 + "";
         inputCanvas.text = "";
         caretPosCanvas.text = 0 + "";
     }
+
+    public void copyPressed(){
+        string wordtext = caretCanvas.text;
+        string pattern = "<mark=#000000FF>(.*?)</mark>";
+        // Use Regex to find matches
+        MatchCollection matches = Regex.Matches(wordtext, pattern);
+
+        // Initialize a string to store the combined boldChars
+        string boldChars = "";
+
+        // Extract and concatenate the boldChars from matches
+        foreach (Match match in matches)
+        {
+            boldChars += match.Groups[1].Value;
+        }
+        clipBoardCanvas.text = boldChars;
+    }
+
+    public void pastePressed(){
+        string copiedText = clipBoardCanvas.text;
+        charNum = int.Parse(caretPosCanvas.text); // caret position
+        string wordtext = inputCanvas.text;
+        inputCanvas.text = wordtext.Substring(0, charNum) + copiedText + wordtext.Substring(charNum);
+        charNum += copiedText.Length;
+        caretPosCanvas.text = charNum + "";
+    }
+
+    public void cutPressed(){
+        string wordtext = caretCanvas.text;
+        string openingTag = "<mark=#000000FF>";
+        string closingTag = "</mark>";
+        string beforeBold = "";
+        string boldChars = "";
+        string afterBold = "";
+
+        // Find the index of the opening tag for the first occurrence
+        int openingIndex = wordtext.IndexOf(openingTag);
+
+        if (openingIndex != -1)
+        {
+            // Find the index of the closing tag for the first occurrence
+            int closingIndex = wordtext.IndexOf(closingTag, openingIndex);
+
+            if (closingIndex != -1)
+            {
+                // Extract beforeBold, boldChars, and afterBold based on the indices
+                beforeBold = wordtext.Substring(0, openingIndex);
+                boldChars = wordtext.Substring(openingIndex + openingTag.Length, closingIndex - openingIndex - openingTag.Length);
+                afterBold = wordtext.Substring(closingIndex + closingTag.Length);
+
+            }
+        }
+
+        clipBoardCanvas.text = boldChars;
+        inputCanvas.text = beforeBold + afterBold;
+        caretCanvas.text = inputCanvas.text;
+        caretPosCanvas.text = beforeBold.Length + 1 + "";
+
+    }
+
 
     // Update is called once per frame
     void Update()

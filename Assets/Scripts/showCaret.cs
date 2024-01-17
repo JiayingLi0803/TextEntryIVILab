@@ -233,9 +233,7 @@ public class showCaret : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
+    public void caretUpdate(){
         if (string.IsNullOrEmpty(wordText.text))
         {
             caretText.text = "<mark=#000000FF>" + "_" + "</mark>";
@@ -286,5 +284,60 @@ public class showCaret : MonoBehaviour
             }
 
         }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+    //     if (string.IsNullOrEmpty(wordText.text))
+    //     {
+    //         caretText.text = "<mark=#000000FF>" + "_" + "</mark>";
+    //         caretPosCanvas.text = "0";
+    //     }
+    //     // else if (wordText.text[wordText.text.Length - 1] == '\n')
+    //     // {
+    //     //     caretText.text = wordText.text + "<mark=#000000FF>" + "_" + "</mark>";
+    //     // }
+    //     else
+    //     {
+    //         caretPos = int.Parse(caretPosCanvas.text);
+    //         if (caretPos == wordText.text.Length)
+    //         {
+    //             beforeCaret = wordText.text.Substring(0, wordText.text.Length - 1);
+    //             boldText = wordText.text.Substring(wordText.text.Length - 1);
+    //             if (boldText == " ")
+    //             {
+    //                 caretText.text = beforeCaret + "<mark=#000000FF>" + "_" + "</mark>";
+    //             }
+    //             else if (wordText.text[caretPos-1] == '\n'){
+    //                 caretText.text = wordText.text + "<mark=#000000FF>" + "_" + "</mark>";
+    //             }
+    //             else
+    //             {
+    //                 caretText.text = beforeCaret + "<mark=#000000FF>" + boldText + "</mark>";
+    //             }
+    //         }
+    //         else
+    //         {
+    //             if (wordText.text[caretPos-1] == '\n' && caretPos < wordText.text.Length){
+    //                 beforeCaret = wordText.text.Substring(0, caretPos-1);
+    //                 boldText = "_\n";
+    //                 afterCaret = wordText.text.Substring(caretPos);
+    //             }
+    //             else if (wordText.text[caretPos-1] =='\n'){
+    //                 beforeCaret = wordText.text.Substring(0, caretPos-1);
+    //                 boldText = "_";
+    //                 afterCaret = wordText.text.Substring(caretPos);
+    //             }
+    //             else{
+    //                 beforeCaret = wordText.text.Substring(0, caretPos - 1);
+    //                 boldText = wordText.text.Substring(caretPos - 1, 1);
+    //                 afterCaret = wordText.text.Substring(caretPos);
+    //             }
+                
+    //             caretText.text = beforeCaret + "<mark=#000000FF>" + boldText + "</mark>" + afterCaret;
+    //         }
+
+    //     }
     }
 }
