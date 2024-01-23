@@ -9,6 +9,7 @@ public class outputLog : MonoBehaviour
 {
     public OVRCameraRig ovrCameraRig;
     private Camera ovrCamera;
+    public GameObject functionKeys;
     public TextMeshProUGUI logGUI;
     public TextMeshProUGUI initPointGUI;
     public TextMeshProUGUI pointerGUI;
@@ -213,6 +214,9 @@ public int FindClosestCharacterIndexAtWorldPoint(Vector3 worldPoint)
                 
                 CaretGUI.text = beforeBold + "<mark=#000000FF>" + boldChars + "</mark>" + afterBold;
                 caretPositionGUI.text = finalCharIndex + 1 + "";
+
+                functionKeys.transform.position = finalCaretPosition;
+                functionKeys.SetActive(true);
             }
             else
             {

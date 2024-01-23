@@ -11,6 +11,7 @@ public class keySwitch : MonoBehaviour
     public bool shiftKey;
     public GameObject normalKeys;
     public GameObject capitalKeys;
+    public GameObject functionKeys;
     public TextMeshPro capsText;
     public GameObject beforeShiftKeys;
     public GameObject afterShiftKeys;
@@ -71,24 +72,44 @@ public class keySwitch : MonoBehaviour
     }
 
     public void delPressed(){
-        charNum = int.Parse(caretPosCanvas.text); // caret position
-        if (charNum > 1) {
-            // if (inputCanvas.text[charNum-1] == '\n'){
-            //     lineNum = int.Parse(lineInfoCanvas.text.Substring(lineInfoCanvas.text.Length-1).ToString());
-            //     lineNum -= 1;
-            //     lineInfoCanvas.text = "Lines: " + lineNum + "";
-            // }
-            string beforeCaret = inputCanvas.text.Substring(0, charNum-1);
-            string afterCaret = inputCanvas.text.Substring(charNum);
-            inputCanvas.text =  beforeCaret + afterCaret;
+        // Find the starting index of "<mark=#000000FF>"
+        int startIndex = caretCanvas.text.IndexOf("<mark=#000000FF>");
 
-            charNum -= 1;
+        // Find the ending index of "</mark>"
+        int endIndex = caretCanvas.text.IndexOf("</mark>");
+        if (startIndex != -1 && endIndex != -1 && endIndex > startIndex)
+        {
+            // Extract the beforeCaret, boldText, and afterCaret strings
+            string beforeCaret = caretCanvas.text.Substring(0, startIndex);
+            string boldText = caretCanvas.text.Substring(startIndex + "<mark=#000000FF>".Length, endIndex - startIndex - "<mark=#000000FF>".Length);
+            string afterCaret = caretCanvas.text.Substring(endIndex + "</mark>".Length);
+
             
+            inputCanvas.text = beforeCaret + afterCaret;
+            caretPosCanvas.text = startIndex + "";
         }
-        else if (charNum == 1){
-            inputCanvas.text =  inputCanvas.text.Substring(1);
-        }
-        caretPosCanvas.text = charNum + "";
+        // else
+        // {
+        //     charNum = int.Parse(caretPosCanvas.text); // caret position
+        //     if (charNum > 1) {
+        //         // if (inputCanvas.text[charNum-1] == '\n'){
+        //         //     lineNum = int.Parse(lineInfoCanvas.text.Substring(lineInfoCanvas.text.Length-1).ToString());
+        //         //     lineNum -= 1;
+        //         //     lineInfoCanvas.text = "Lines: " + lineNum + "";
+        //         // }
+        //         string beforeCaret = inputCanvas.text.Substring(0, charNum-1);
+        //         string afterCaret = inputCanvas.text.Substring(charNum);
+        //         inputCanvas.text =  beforeCaret + afterCaret;
+
+        //         charNum -= 1;
+                
+        //     }
+        //     else if (charNum == 1){
+        //         inputCanvas.text =  inputCanvas.text.Substring(1);
+        //     }
+        //     caretPosCanvas.text = charNum + "";
+        // }
+        
     }
     public void returnPressed(){
         charNum = int.Parse(caretPosCanvas.text);
@@ -108,6 +129,7 @@ public class keySwitch : MonoBehaviour
         lineInfoCanvas.text = "Lines: " + 1 + "";
         inputCanvas.text = "";
         caretPosCanvas.text = 0 + "";
+        functionKeys.SetActive(false);
     }
 
     public void copyPressed(){
@@ -125,6 +147,7 @@ public class keySwitch : MonoBehaviour
             boldChars += match.Groups[1].Value;
         }
         clipBoardCanvas.text = boldChars;
+        functionKeys.SetActive(false);
     }
 
     public void pastePressed(){
@@ -134,6 +157,7 @@ public class keySwitch : MonoBehaviour
         inputCanvas.text = wordtext.Substring(0, charNum) + copiedText + wordtext.Substring(charNum);
         charNum += copiedText.Length;
         caretPosCanvas.text = charNum + "";
+        functionKeys.SetActive(false);
     }
 
     public void cutPressed(){
@@ -166,7 +190,12 @@ public class keySwitch : MonoBehaviour
         inputCanvas.text = beforeBold + afterBold;
         caretCanvas.text = inputCanvas.text;
         caretPosCanvas.text = beforeBold.Length + 1 + "";
+        functionKeys.SetActive(false);
 
+    }
+
+    public void closePressed(){
+        functionKeys.SetActive(false); // set to invisible
     }
 
 
