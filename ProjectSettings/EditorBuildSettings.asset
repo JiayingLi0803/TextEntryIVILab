@@ -6,32 +6,26 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Scenes/keyboardTyping.unity
-    guid: 7365856d018f640f7a423675596e6254
-  - enabled: 0
     path: Assets/Scenes/MetaBuiltInPokeExamples.unity
     guid: 9aa76a189580f4c2391f2216416feeca
   - enabled: 0
     path: Assets/Scenes/MetaBuiltInKeyboard.unity
     guid: 07588f6654c0140fe90a856dcf0472ed
   - enabled: 0
-    path: Assets/Scenes/buttontest.unity
-    guid: 77ea1af114f6f4c72b1ac19092aa608c
-  - enabled: 0
     path: Assets/Scenes/selectionTest.unity
     guid: d5bc21d4e119a46758a3410822b464f9
   - enabled: 0
-    path: Assets/Scenes/controllerTyping.unity
-    guid: fb546614062464f1ba5cb4f240918b25
-  - enabled: 0
-    path: Assets/Scenes/ControllerSelection.unity
-    guid: 83f7ae7f469e642f387ed95f29ed1b3f
-  - enabled: 0
     path: Assets/Scenes/textInteraction.unity
     guid: f448d8ca1ba264ced9fbc8673fc9f9ff
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Task/Task1.unity
     guid: c5b3ea6f0916a427c980909c76dca16a
+  - enabled: 0
+    path: Assets/Scenes/Task/Task2.unity
+    guid: 063db037bd1934c66a0345c4b96a9af0
+  - enabled: 1
+    path: Assets/Scenes/Task/Task3.unity
+    guid: 69ab15383ebd840b28993274f462c8e0
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: ec821003707fb4525a94b7911d7db085, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 337e3835705a844e3a41bdb30ced55cf, type: 2}

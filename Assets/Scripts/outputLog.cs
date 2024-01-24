@@ -215,7 +215,10 @@ public int FindClosestCharacterIndexAtWorldPoint(Vector3 worldPoint)
                 CaretGUI.text = beforeBold + "<mark=#000000FF>" + boldChars + "</mark>" + afterBold;
                 caretPositionGUI.text = finalCharIndex + 1 + "";
 
-                functionKeys.transform.position = finalCaretPosition;
+
+                Vector3 funcKeyPosition = finalCaretPosition;
+                funcKeyPosition.z -= 0.05f;
+                functionKeys.transform.position = funcKeyPosition;
                 functionKeys.SetActive(true);
             }
             else
