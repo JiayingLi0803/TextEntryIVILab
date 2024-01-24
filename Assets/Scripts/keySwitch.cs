@@ -72,8 +72,8 @@ public class keySwitch : MonoBehaviour
     }
 
     public void delPressed(){
-        // Find the starting index of "<mark=#000000FF>"
-        int startIndex = caretCanvas.text.IndexOf("<mark=#000000FF>");
+        // Find the starting index of "<mark=#FFFF0080>"
+        int startIndex = caretCanvas.text.IndexOf("<mark=#FFFF0080>");
 
         // Find the ending index of "</mark>"
         int endIndex = caretCanvas.text.IndexOf("</mark>");
@@ -81,7 +81,7 @@ public class keySwitch : MonoBehaviour
         {
             // Extract the beforeCaret, boldText, and afterCaret strings
             string beforeCaret = caretCanvas.text.Substring(0, startIndex);
-            string boldText = caretCanvas.text.Substring(startIndex + "<mark=#000000FF>".Length, endIndex - startIndex - "<mark=#000000FF>".Length);
+            string boldText = caretCanvas.text.Substring(startIndex + "<mark=#FFFF0080>".Length, endIndex - startIndex - "<mark=#FFFF0080>".Length);
             string afterCaret = caretCanvas.text.Substring(endIndex + "</mark>".Length);
 
             
@@ -134,7 +134,7 @@ public class keySwitch : MonoBehaviour
 
     public void copyPressed(){
         string wordtext = caretCanvas.text;
-        string pattern = "<mark=#000000FF>(.*?)</mark>";
+        string pattern = "<mark=#FFFF0080>(.*?)</mark>";
         // Use Regex to find matches
         MatchCollection matches = Regex.Matches(wordtext, pattern);
 
@@ -162,7 +162,7 @@ public class keySwitch : MonoBehaviour
 
     public void cutPressed(){
         string wordtext = caretCanvas.text;
-        string openingTag = "<mark=#000000FF>";
+        string openingTag = "<mark=#FFFF0080>";
         string closingTag = "</mark>";
         string beforeBold = "";
         string boldChars = "";

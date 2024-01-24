@@ -3377,7 +3377,7 @@ MonoBehaviour:
     surface and move to select. The selected words will highlighted with black background
     color.'
   sampleGUI: {fileID: 1770341299}
-  sampleFrontGUI: {fileID: 0}
+  sampleFrontGUI: {fileID: 422912275}
   expGUI: {fileID: 275748059}
   textGUI: {fileID: 687195606}
   caretGUI: {fileID: 0}

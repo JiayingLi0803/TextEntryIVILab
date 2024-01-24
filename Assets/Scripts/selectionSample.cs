@@ -28,7 +28,7 @@ public class selectionSample : MonoBehaviour
     }
 
     public void generatePattern(){
-        if (currExp < 6){
+        if (currExp < totalExp){
             int id1, id2;
             do
             {
@@ -50,6 +50,7 @@ public class selectionSample : MonoBehaviour
         }
         else{
             sampleGUI.text = "Your tasks are done!";
+            sampleFrontGUI.text = "Your tasks are done!";
         }
         textGUI.text = sampleSentence;
     }

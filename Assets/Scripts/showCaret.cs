@@ -236,12 +236,12 @@ public class showCaret : MonoBehaviour
     public void caretUpdate(){
         if (string.IsNullOrEmpty(wordText.text))
         {
-            caretText.text = "<mark=#000000FF>" + "_" + "</mark>";
+            caretText.text = "<mark=#FFFF0080>" + "_" + "</mark>";
             caretPosCanvas.text = "0";
         }
         // else if (wordText.text[wordText.text.Length - 1] == '\n')
         // {
-        //     caretText.text = wordText.text + "<mark=#000000FF>" + "_" + "</mark>";
+        //     caretText.text = wordText.text + "<mark=#FFFF0080>" + "_" + "</mark>";
         // }
         else
         {
@@ -252,14 +252,14 @@ public class showCaret : MonoBehaviour
                 boldText = wordText.text.Substring(wordText.text.Length - 1);
                 if (boldText == " ")
                 {
-                    caretText.text = beforeCaret + "<mark=#000000FF>" + "_" + "</mark>";
+                    caretText.text = beforeCaret + "<mark=#FFFF0080>" + "_" + "</mark>";
                 }
                 else if (wordText.text[caretPos-1] == '\n'){
-                    caretText.text = wordText.text + "<mark=#000000FF>" + "_" + "</mark>";
+                    caretText.text = wordText.text + "<mark=#FFFF0080>" + "_" + "</mark>";
                 }
                 else
                 {
-                    caretText.text = beforeCaret + "<mark=#000000FF>" + boldText + "</mark>";
+                    caretText.text = beforeCaret + "<mark=#FFFF0080>" + boldText + "</mark>";
                 }
             }
             else
@@ -280,7 +280,7 @@ public class showCaret : MonoBehaviour
                     afterCaret = wordText.text.Substring(caretPos);
                 }
                 
-                caretText.text = beforeCaret + "<mark=#000000FF>" + boldText + "</mark>" + afterCaret;
+                caretText.text = beforeCaret + "<mark=#FFFF0080>" + boldText + "</mark>" + afterCaret;
             }
 
         }
@@ -291,12 +291,12 @@ public class showCaret : MonoBehaviour
     {
     //     if (string.IsNullOrEmpty(wordText.text))
     //     {
-    //         caretText.text = "<mark=#000000FF>" + "_" + "</mark>";
+    //         caretText.text = "<mark=#FFFF0080>" + "_" + "</mark>";
     //         caretPosCanvas.text = "0";
     //     }
     //     // else if (wordText.text[wordText.text.Length - 1] == '\n')
     //     // {
-    //     //     caretText.text = wordText.text + "<mark=#000000FF>" + "_" + "</mark>";
+    //     //     caretText.text = wordText.text + "<mark=#FFFF0080>" + "_" + "</mark>";
     //     // }
     //     else
     //     {
@@ -307,14 +307,14 @@ public class showCaret : MonoBehaviour
     //             boldText = wordText.text.Substring(wordText.text.Length - 1);
     //             if (boldText == " ")
     //             {
-    //                 caretText.text = beforeCaret + "<mark=#000000FF>" + "_" + "</mark>";
+    //                 caretText.text = beforeCaret + "<mark=#FFFF0080>" + "_" + "</mark>";
     //             }
     //             else if (wordText.text[caretPos-1] == '\n'){
-    //                 caretText.text = wordText.text + "<mark=#000000FF>" + "_" + "</mark>";
+    //                 caretText.text = wordText.text + "<mark=#FFFF0080>" + "_" + "</mark>";
     //             }
     //             else
     //             {
-    //                 caretText.text = beforeCaret + "<mark=#000000FF>" + boldText + "</mark>";
+    //                 caretText.text = beforeCaret + "<mark=#FFFF0080>" + boldText + "</mark>";
     //             }
     //         }
     //         else
@@ -335,7 +335,7 @@ public class showCaret : MonoBehaviour
     //                 afterCaret = wordText.text.Substring(caretPos);
     //             }
                 
-    //             caretText.text = beforeCaret + "<mark=#000000FF>" + boldText + "</mark>" + afterCaret;
+    //             caretText.text = beforeCaret + "<mark=#FFFF0080>" + boldText + "</mark>" + afterCaret;
     //         }
 
     //     }

@@ -212,7 +212,7 @@ public int FindClosestCharacterIndexAtWorldPoint(Vector3 worldPoint)
                 finalPointGUI.text = "Final character at index " + finalCharIndex + ": " + textGUI.text[finalCharIndex];
 
                 
-                CaretGUI.text = beforeBold + "<mark=#000000FF>" + boldChars + "</mark>" + afterBold;
+                CaretGUI.text = beforeBold + "<mark=#FFFF0080>" + boldChars + "</mark>" + afterBold;
                 caretPositionGUI.text = finalCharIndex + 1 + "";
 
 
